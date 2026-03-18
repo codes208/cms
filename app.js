@@ -3,9 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const session = require('express-session')
-const sequelize = require('./db')
-const User = require('./models/user')
+const session = require('express-session');
+const sequelize = require('./db');
+const User = require('./models/user');
+const Course = require('./models/Courses');
 
 var indexRouter = require('./routes/index');
 var coursesRouter = require('./routes/courses');
@@ -52,6 +53,13 @@ app.use(function(err, req, res, next) {
 async function setup(){
   const cody = await User.create({ userName: "cody", password: "1234"});
   console.log("cody instance created...");
+  const webdev = await Course.create({ 
+    courseId: "CPTS489", 
+    courseName: "WebDev", 
+    courseSemester: "Spring",
+    courseDescription: "Introduction to web development", 
+    courseEnrollNum: 80
+  })
 }
 
 sequelize.sync({ force: true }).then(() => {
