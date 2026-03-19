@@ -83,23 +83,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">CPTS_111</th>
-          <td>Introduction to Computer Programming</td>
-          <td>Fall</td>
-          <td>100</td>
-        </tr>
-        <tr>
-          <th scope="row">CPTS_121</th>
-          <td>Program Design and Development C/C++</td>
-          <td>Spring</td>
-          <td>90</td>
-        </tr>
-        <tr>
-          <th scope="row">CPTS_131</th>
-          <td>Program Design and Development Java</td>
-          <td>Summer</td>
-          <td>80</td>
+        <% for (course of courses) { %>
+          <tr>
+            <td scope="row"><a href=<%= "/courses/" + course.courseId %>><%= course.courseId %></a></td>
+            <td><%= course.courseName %></td>
+            <td><%= course.courseSemester %></td>
+            <td><%= course.courseEnrollNum %></td>
+          </tr>
+        <% } %>
         </tr>
       </tbody>
     </table>

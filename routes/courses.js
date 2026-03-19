@@ -13,13 +13,14 @@ const sessionChecker = (req, res, next) => {
 router.use(sessionChecker)
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/', async function(req, res, next) {
   // console.log(req.session.user)
+  const courses = await Course.findAll();
   if(req.query.msg){
     res.locals.msg = req.query.msg;
     res.locals.courseId = req.query.courseId;
   }
-  res.render('courses');
+  res.render('courses', { courses });
 });
 
 router.post('/create', async function(req, res, next) {
