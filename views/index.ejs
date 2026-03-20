@@ -293,6 +293,25 @@ input[type=text]:placeholder {
       <input type="submit" class="fadeIn fourth" value="Log In">
     </form>
 
+    <% if (locals.msg) {%>
+      <% if (locals.msg && msg === "fail") { %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <p class="mb-0">username and/or password did not match. Try again</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% } else if (locals.msg && msg === "raf") { %>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <p class="mb-0">Authorized access only! Please login</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% } else if (locals.msg && msg === "logout") { %>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <p class="mb-0">Succesfully logged out!</p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% } %>
+  <% }%>
+
     <!-- Remind Passowrd -->
     <div id="formFooter">
       <a class="underlineHover" href="#">Forgot Password?</a>

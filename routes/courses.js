@@ -4,6 +4,7 @@ const Course = require("../models/Courses");
 
 const sessionChecker = (req, res, next) => {
   if(req.session.user){
+    res.locals.username = req.session.user.userName
     next();
   } else {
     res.redirect("/?msg=raf")
@@ -46,7 +47,7 @@ router.get("/:courseId", async function(req, res, next) {
   if (course){
     res.render('courseDetails', { course });
   } else {
-    res.redirect('/courses/?msg=course+not+found&?courseId=' + req.params.courseId);
+    res.redirect('/courses/?msg=course+not+found&courseId=' + req.params.courseId);
   }
   
 });
@@ -55,9 +56,9 @@ router.get("/delete/:courseId", async function(req, res, next) {
   const course = await Course.findCourse(req.params.courseId)
   if (course){
     await course.destroy();
-    res.redirect('/courses/?msg=successdelete&?courseid=' + req.params.courseId);
+    res.redirect('/courses/?msg=successdelete&courseId=' + req.params.courseId);
   } else {
-    res.redirect('/courses/?msg=course+not+found&?courseId=' + req.params.courseId);
+    res.redirect('/courses/?msg=course+not+found&courseId=' + req.params.courseId);
   }
   
 });
